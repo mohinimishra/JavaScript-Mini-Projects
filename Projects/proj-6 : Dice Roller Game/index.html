@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller Game</title>
+</head>
+<style>
+    .output {
+        width: 450px;
+        text-align: center;
+        font-size: 2em;
+    }
+
+    button {
+        padding: 10px;
+        text-align: center;
+        width: 450px;
+    }
+
+    .dicer {
+        border: 1px solid black;
+        width: 90px;
+        height: 90px;
+        padding: 2px;
+        border-radius: 10px;
+    }
+
+    .black {
+        background-color: black;
+    }
+
+    .white {
+        background-color: white;
+    }
+
+    .dot {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+    }
+
+    .viewer {
+        display: inline-block;
+        width: 211px;
+        height: 150px;
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .namer {
+        display: inline-block;
+        font-family: cursive;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="gamearea">
+        <div class="output">
+            <div> Roll the Dice??</div>
+        </div>
+        <div class="viewer">
+            <span class="namer">Player 1</span>
+            <span id="player1"></span>
+        </div>
+        <div class="viewer">
+            <span class="namer">Player 2</span>
+            <span id="player2"></span>
+        </div>
+    </div>
+    <button type="button">Roll</button>
+
+
+    <script src="./gameApp.js"></script>
+</body>
+
+</html>
