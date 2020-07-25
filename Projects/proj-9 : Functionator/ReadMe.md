@@ -1,7 +1,6 @@
 # About this Project
 
 *   All JavaScript NO HTML.
-<br>
 
 *   Press Keys Setup Movement.
 
