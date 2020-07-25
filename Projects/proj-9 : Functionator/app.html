@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functionator</title>
+
+</head>
+
+<body>
+    <script>
+        // create a block //
+        let div;
+        let keyList = [];
+        let functionList;
+        let moverList = ["right", "left", "up", "down"]
+        document.addEventListener("DOMContentLoaded", function () {
+            div = document.createElement('div')
+            div.innerText = "Hello-World"
+            div.style.width = '100px';
+            div.style.height = '100px';
+            div.style.backgroundColor = "red";
+            div.style.color = "white"
+            div.style.lineHeight = "100px";
+            div.style.textAlign = "center";
+            div.style.position = "absolute";
+            div.style.top = "100px";
+            div.style.left = "150px"
+            document.body.appendChild(div)
+            functionList = document.createElement("div")
+            document.body.appendChild(functionList)
+        })
+        // add eventlistner for keypress
+        document.addEventListener('keydown', function (e) {
+            console.log(e.keyCode)
+            if (e.keyCode === 37) { addFun("left") }
+            else if (e.keyCode === 38) { addFun("top") }
+            else if (e.keyCode === 39) { addFun("right") }
+            else if (e.keyCode === 40) { addFun("down") }
+            else if (e.keyCode === 67) { div.style.backgroundColor = randomColor() }
+            else if (e.keyCode === 81) {
+                let temp = moverList[parseInt((Math.random() * moverList.length))]
+                console.log(temp)
+                addFun(temp)
+            }
+            else if (e.keyCode === 13 || e.keyCode === 32) {
+                mover();
+            }
+
+        })
+
+        function mover() {
+            if (keyList.length > 0) {
+                let currPosition = div.getBoundingClientRect();
+                let element = keyList.shift()
+                functionList.removeChild(element)
+                let item = element.textContent.replace("+", "")
+                div.innerHtml = "Move:" + item
+                if (item == "left") {
+                    div.style.left = currPosition.left - currPosition.width + "px"
+                }
+
+                else if (item == "right") {
+                    div.style.left = currPosition.left + currPosition.width + "px"
+                }
+                else if (item == "up") {
+                    div.style.top = currPosition.top - currPosition.width + "px"
+                }
+                else if (item == "down") {
+                    div.style.top = currPosition.top + currPosition.width + "px"
+                }
+                setTimeout(mover, 3000)
+            } else {
+                div.innerText = "Set Path"
+            }
+        }
+        // function to creat a random hex color for div block //
+        function randomColor() {
+            return "#" + Math.random().toString(16).substr(-6);
+        }
+        // to add keyvalue boxes //
+        function addFun(value) {
+            let span = document.createElement("span")
+            span.textContent = `+${value}`
+            span.style.padding = "5px"
+            span.style.border = "1px solid gray"
+            span.addEventListener('mouseover', function () {
+                this.style.backgroundColor = "red";
+                this.style.color = "white";
+            })
+            span.addEventListener('mouseout', function () {
+                this.style.backgroundColor = "white"
+                this.style.color = "black"
+            })
+            span.addEventListener("click", function () {
+                let curIndex = keyList.indexOf(this)
+                let tempRemove = keyList.splice(curIndex, 1)
+                functionList.removeChild(this)
+            })
+
+            functionList.appendChild(span)
+            keyList.push(span)
+            console.log(keyList)
+        }
+        // function to move box to left side //
+        function goLeft() {
+            let temp = div.offsetLeft
+            temp -= 50
+            div.style.left = temp + "px";
+        }
+        // function to move box to right side //
+        function goRight() {
+            let temp = div.offsetLeft
+            temp += 50;
+            div.style.left = temp + "px"
+        }
+        // function to move box to Up side //
+        function goTop() {
+            let temp = div.offsetTop
+            temp -= 50;
+            div.style.top = temp + "px"
+        }
+        // function to move box to down side //
+        function goDown() {
+            let temp = div.offsetTop
+            temp += 50;
+            div.style.top = temp + "px"
+        }
+    </script>
+</body>
+
+</html>
